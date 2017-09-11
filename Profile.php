@@ -60,7 +60,7 @@
 
         if (isset($_SESSION['username'])){
             echo "<li class=\"navbar-inverse\"><a href=\"profile.php\">Welcome " . $_SESSION['username'] . "</a></li>";
-            echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Log out</a></li>";
+            echo "<li><a href=\"/Board_Finder/logout.php\"><span class=\"glyphicon glyphicon-user\"></span> Logout</a></li>";
         }
         else{
             echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li> <li><a href=\"#\" onclick=\"document.getElementById('id01').style.display='block'\" style=\"width:auto;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
