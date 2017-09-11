@@ -23,7 +23,7 @@ if (!$conn) {
             }
         }
     }
-//    echo $game_names;
+    echo json_encode($game_names);
     exit();
 }
 ?>
