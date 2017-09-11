@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 септ 2017 в 13:59
+-- Generation Time: 11 септ 2017 в 16:49
 -- Версия на сървъра: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -25,13 +25,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Структура на таблица `events`
+--
+
+CREATE TABLE `events` (
+  `ID` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `description` varchar(150) NOT NULL,
+  `langitude` decimal(10,0) NOT NULL,
+  `longitude` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `event_games`
+--
+
+CREATE TABLE `event_games` (
+  `eventID` int(11) NOT NULL,
+  `gameID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Структура на таблица `games`
 --
 
 CREATE TABLE `games` (
   `ID` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
+  `game_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Схема на данните от таблица `games`
+--
+
+INSERT INTO `games` (`ID`, `game_name`) VALUES
+(1, 'Catan');
 
 -- --------------------------------------------------------
 
@@ -74,11 +106,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `username`, `password`) VALUES
-(0, 'martin', 'martin16');
+(1, 'martin', 'martin16');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `games`
@@ -103,7 +141,26 @@ ALTER TABLE `owned_games`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`);
-COMMIT;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `games`
+--
+ALTER TABLE `games`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

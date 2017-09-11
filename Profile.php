@@ -129,7 +129,7 @@
                     <h4>Games you are intrested in:</h4>
                     <div class="tagholder" id="liked">
                     </div>
-                    <form action="/add.php" method="POST">
+                    <form action="add.php" method="POST">
                         <input type="text" name="game">
                         <input type="hidden" name="addToDatabase" value="interes_games">
                         <input type="submit">
