@@ -20,7 +20,7 @@ if (!$conn){
     http_response_code(404);
     die(mysqli_connect_error());
 }else{
-    $log = mysqli_query($conn,'SELECT password FROM users WHERE username == $_GET['username']');
+    $log = mysqli_query($conn,'SELECT password FROM users WHERE username == $_GET["username"]');
     while ($var_dump = mysqli_fetch_array($log)){
         if ($var_dump['password'] == $_GET['password']){
             http_response_code(200);
