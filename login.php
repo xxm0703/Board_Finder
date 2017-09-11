@@ -11,7 +11,7 @@ if (!$conn){
     http_response_code(503);
     die("asd");
 }else{
-    $log = mysqli_query($conn,'SELECT password FROM users WHERE username == $_GET["username"]');
+    $log = mysqli_query($conn,'SELECT password FROM users WHERE username == $_POST["username"]');
     if (!$log){
         header("Location: Profile.php#"); /* Redirect browser */
         exit();
