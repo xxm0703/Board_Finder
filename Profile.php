@@ -49,8 +49,19 @@
             <li><a href="#">Trade</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+        <?php
+        // session_start();
+        // $_SESSION['username']   = 'cat';
+
+        if (isset($_SESSION['username'])){
+            echo "<li class=\"navbar-inverse\"><a href=\"profile.php\">Welcome " . $_SESSION['username'] . "</a></li>";
+        }
+        else{
+            echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li> <li><a href=\"#\" onclick=\"document.getElementById('id01').style.display='block'\" style=\"width:auto;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
+        }
+
+        ?>
         </ul>
     </div>
 </nav>
@@ -136,7 +147,7 @@
                         <input type="submit">
                     </form>
                 </div>
-                <div class="bs-callout bs-callout-danger">
+           <!--      <div class="bs-callout bs-callout-danger">
                     <h4>Games you Like</h4>
                     <form action="/add.php" method="POST">
                         <input type="text" name="game">
@@ -145,13 +156,7 @@
                     </form>
                 </div>
                 <div class="bs-callout bs-callout-danger">
-                    <h4>Games you want to buy</h4>
-                    <form action="/add.php" method="POST">
-                        <input type="text" name="game">
-                        <input type="hidden" name="addToDatabase" value="Wanted">
-                        <input type="submit">
-                    </form>
-                </div>
+                </div> -->
 
                 <div class="bs-callout bs-callout-danger">
                     <h4>Education</h4>
@@ -184,7 +189,7 @@
 
     <div id="id01" class="modal">
 
-        <form class="container modal-content animate" action="login.php">
+        <form class="container modal-content animate" action="login.php" method="POST">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <img src="img_avatar2.png" alt="Avatar" class="avatar">
