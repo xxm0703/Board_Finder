@@ -134,6 +134,7 @@
                         $result = file_get_contents($url);
                         $array =  json_decode($result);
 
+                        print_r($result);
                         
                         foreach ($array as $key => $value){
                             echo "<span class='tag'>" . $value . "</span>";
