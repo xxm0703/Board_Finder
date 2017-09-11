@@ -13,15 +13,17 @@ if (!$conn){
 }else{
     $log = mysqli_query($conn,'SELECT password FROM users WHERE username == $_POST["username"]');
     if (!$log){
-        header("Location: Profile.php#"); /* Redirect browser */
+        http_response_code(400);
+        header("Location: Profile.php#");
         exit();
     }else {
         while ($var_dump = mysqli_fetch_array($log)) {
             if ($var_dump['password'] == $_POST['password']) {
+                http_response_code(200);
                 header('Location: Profile.php#',
                     true,
                     202);
-                mysqli_close($conn);
+                exit();
             }
         }
     }
