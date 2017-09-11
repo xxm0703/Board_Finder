@@ -173,7 +173,7 @@
       <path value="C:\Users\martin\Desktop\php-7.1.9-Win32-VC14-x86" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="170" />
     <option name="y" value="91" />
     <option name="width" value="1026" />
@@ -267,7 +267,7 @@
       <workItem from="1505078448855" duration="7965000" />
       <workItem from="1505126396318" duration="2070000" />
       <workItem from="1505129661685" duration="6807000" />
-      <workItem from="1505137735050" duration="4054000" />
+      <workItem from="1505137735050" duration="4133000" />
     </task>
     <task id="LOCAL-00001" summary="PHP">
       <created>1505115685957</created>
@@ -357,10 +357,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29441000" />
+    <option name="totallyTimeSpent" value="29520000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13020833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
