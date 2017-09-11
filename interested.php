@@ -17,9 +17,11 @@ if (!$conn) {
         $ID = $_SESSION['ID'];
         $log = mysqli_query($conn, "SELECT gameID FROM interes_games WHERE userID='$ID'");
         while ($gameid = mysqli_fetch_array($log)) {
-            $game = mysqli_query($conn, "SELECT game_name FROM games WHERE ID='$gameid'");
+        	$temp = $gameid[0];
+            $game = mysqli_query($conn, "SELECT name FROM games WHERE ID='$temp'");
             while ($gamename = mysqli_fetch_array($game)) {
-                array_push($game_names, $gamename);
+            	
+                array_push($game_names, $gamename[0]);
             }
         }
     }
