@@ -3,6 +3,7 @@
     <words>
       <w>dbconn</w>
       <w>dbname</w>
+      <w>gameid</w>
     </words>
   </dictionary>
 </component>
