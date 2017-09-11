@@ -11,6 +11,10 @@ if (!$conn){
     http_response_code(503);
     die("asd");
 }else{
+    if (!isset($_POST['username'])) {
+        header("Location: Profile.php", true, 400);
+        exit();
+    }
     $test = $_POST["username"];
     $log = mysqli_query($conn,"SELECT ID,password FROM users WHERE username = \"{$test}\"");
     if ($log == false || $log->num_rows!=1){

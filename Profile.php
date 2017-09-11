@@ -131,7 +131,7 @@
                     </div>
                     <form action="/add.php" method="POST">
                         <input type="text" name="game">
-                        <input type="hidden" name="addToDatabase" value="liked">
+                        <input type="hidden" name="addToDatabase" value="interes_games">
                         <input type="submit">
                     </form>
                 </div>
