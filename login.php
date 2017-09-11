@@ -25,7 +25,6 @@ if (!$conn){
             if ($var_dump[1] == $_POST['password']) {
                 $_SESSION['ID'] = $var_dump[0];
                 $_SESSION['username'] = $_POST['username'];
-                //http_response_code(200);
                 header('Location: Profile.php');
                 exit();
             }
