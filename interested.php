@@ -1,3 +1,4 @@
-<?php
-	echo "['catan','monopoly']"
-?>
+[
+		"catan",
+		"monopoly"
+]

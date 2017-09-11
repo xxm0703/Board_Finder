@@ -28,6 +28,7 @@
                 color:white;
                 background-color: #333;
                 padding: 5px;
+                margin: 5px;
         }
         div.tagholder{
             margin: 10px;
@@ -112,21 +113,20 @@
                     <h4>Games you Own:</h4>
                     <div class="tagholder">
                     <?php
-                        $url = '/interested.php';
+                        $url = 'interested.php';
 
                         $options = array(
                             'http' => array(
-                                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                                 'method'  => 'POST'
                             )
                         );
                         $context  = stream_context_create($options);
-                        $result = file_get_contents($url, false, $context);
-                        if ($result === FALSE) { /* Handle error */ }
-                        $array = json_decode($result);
+                        $result = file_get_contents($url);
+                        $array =  json_decode($result);
 
-                        foreach ($array as $value){
-                            echo "<span class='tag'>"+$value+"</span>";
+                        
+                        foreach ($array as $key => $value){
+                            echo "<span class='tag'>" . $value . "</span>";
                         }
                     ?>
                     </div>
