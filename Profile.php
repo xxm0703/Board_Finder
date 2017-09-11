@@ -22,15 +22,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
     <style>
-        span.tag{
-                border-radius: 5px;
-                color:white;
-                background-color: #333;
-                padding: 5px;
-                margin: 5px;
+        span.tag {
+            border-radius: 5px;
+            color: white;
+            background-color: #333;
+            padding: 5px;
+            margin: 5px;
         }
-        div.tagholder{
+
+        div.tagholder {
             margin: 10px;
             margin-left: 0;
         }
@@ -50,6 +55,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
+<<<<<<< HEAD
         <?php
         session_start();
 
@@ -61,7 +67,7 @@
             echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li> <li><a href=\"#\" onclick=\"document.getElementById('id01').style.display='block'\" style=\"width:auto;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
         }
 
-        ?>
+            ?>
         </ul>
     </div>
 </nav>
@@ -77,7 +83,7 @@
                                 <figure>
                                     <img class="img-circle img-responsive" alt="" src="http://placehold.it/300x300">
                                 </figure>
-                                <div    class="row">
+                                <div class="row">
                                     <div class="col-xs-12 social-btns">
                                         <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
                                             <a href="#" class="btn btn-social btn-block btn-google">
@@ -112,8 +118,8 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">John Doe</li>
                                     <li class="list-group-item">Software Engineer</li>
-                                    <li class="list-group-item">Google Inc. </li>
-                                    <li class="list-group-item"><i class="fa fa-phone"></i> 000-000-0000 </li>
+                                    <li class="list-group-item">Google Inc.</li>
+                                    <li class="list-group-item"><i class="fa fa-phone"></i> 000-000-0000</li>
                                     <li class="list-group-item"><i class="fa fa-envelope"></i> john@example.com</li>
                                 </ul>
                             </div>
@@ -123,23 +129,23 @@
                 <div class="bs-callout bs-callout-danger">
                     <h4>Games you Own:</h4>
                     <div class="tagholder">
-                    <?php
+                        <?php
                         $url = 'interested.php';
 
                         $options = array(
                             'http' => array(
-                                'method'  => 'POST'
+                                'method' => 'POST'
                             )
                         );
-                        $context  = stream_context_create($options);
+                        $context = stream_context_create($options);
                         $result = file_get_contents($url);
-                        $array =  json_decode($result);
+                        $array = json_decode($result);
 
-                        
-                        foreach ($array as $key => $value){
+
+                        foreach ($array as $key => $value) {
                             echo "<span class='tag'>" . $value . "</span>";
                         }
-                    ?>
+                        ?>
                     </div>
                     <form action="/add.php" method="POST">
                         <input type="text" name="game">
@@ -147,16 +153,16 @@
                         <input type="submit">
                     </form>
                 </div>
-           <!--      <div class="bs-callout bs-callout-danger">
-                    <h4>Games you Like</h4>
-                    <form action="/add.php" method="POST">
-                        <input type="text" name="game">
-                        <input type="hidden" name="addToDatabase" value="Liked">
-                        <input type="submit">
-                    </form>
-                </div>
-                <div class="bs-callout bs-callout-danger">
-                </div> -->
+                <!--      <div class="bs-callout bs-callout-danger">
+                         <h4>Games you Like</h4>
+                         <form action="/add.php" method="POST">
+                             <input type="text" name="game">
+                             <input type="hidden" name="addToDatabase" value="Liked">
+                             <input type="submit">
+                         </form>
+                     </div>
+                     <div class="bs-callout bs-callout-danger">
+                     </div> -->
 
                 <div class="bs-callout bs-callout-danger">
                     <h4>Education</h4>
@@ -172,12 +178,12 @@
                         <tr>
                             <td>Masters in Computer Science and Engineering</td>
                             <td>2014</td>
-                            <td> 3.50 </td>
+                            <td> 3.50</td>
                         </tr>
                         <tr>
                             <td>BSc. in Computer Science and Engineering</td>
                             <td>2011</td>
-                            <td> 3.25 </td>
+                            <td> 3.25</td>
                         </tr>
                         </tbody>
                     </table>
@@ -207,7 +213,9 @@
             </div>
 
             <div class="col" style="background-color:#f1f1f1;margin-top:10px;">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                    Cancel
+                </button>
                 <span class="psw">Forgot <a href="#">password?</a></span>
             </div>
         </form>
@@ -218,7 +226,7 @@
         var modal = document.getElementById('id01');
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
