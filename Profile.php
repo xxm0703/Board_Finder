@@ -51,8 +51,7 @@
         <ul class="nav navbar-nav navbar-right">
 
         <?php
-        // session_start();
-        // $_SESSION['username']   = 'cat';
+        session_start();
 
         if (isset($_SESSION['username'])){
             echo "<li class=\"navbar-inverse\"><a href=\"profile.php\">Welcome " . $_SESSION['username'] . "</a></li>";
