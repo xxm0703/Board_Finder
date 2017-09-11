@@ -13,8 +13,6 @@ if (!$conn){
 }else{
     $test = $_POST["username"];
     $log = mysqli_query($conn,"SELECT ID,password FROM users WHERE username = \"{$test}\"");
-    // print_r($log);
-    // echo gettype($log);
     if ($log == false || $log->num_rows!=1){
         
         //http_response_code(400);
