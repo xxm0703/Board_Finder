@@ -147,6 +147,11 @@
                             e.innerHTML+=`<span class='tag'>${a}</span>`;
                         }
                     })
+                addEventListener("load",e=>{
+                    if(window.location.search == "?login=true"){
+                        document.getElementById('id01').style.display='block';
+                    }
+                })
 
 
                 </script>
