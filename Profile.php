@@ -57,7 +57,7 @@
     <div class="row">
         <div class="col-sm-9">
             <!-- resumt -->
-            <div class="panel panel-default">
+            <div class="container">
                 <div class="panel-heading resume-heading">
                     <div class="row">
                         <div class="col-lg-12">
@@ -181,7 +181,6 @@
         </div>
         <!-- resume -->
     </div>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 
     <div id="id01" class="modal">
 
@@ -192,7 +191,6 @@
             </div>
 
             <div class="container">
-                <form>
                 <label><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="username" required>
                 <label><b>Password</b></label>
@@ -200,7 +198,6 @@
 
                 <button type="submit">Login</button>
                 <input type="checkbox" checked="checked"> Remember me
-                </form>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
