@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+    <link rel="stylesheet" type="text/css" href="loginStyle.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -32,16 +32,16 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
+            <a class="navbar-brand" href="#">BoardFinder</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Events and people</a></li>
+            <li><a href="#">Trade</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
     </div>
 </nav>
@@ -50,7 +50,7 @@
 
     <div class="row">
 
-        <h1 class="my-4">Shop Name</h1>
+        <h1 class="my-4">Map</h1>
         <div class="checkbox">
             <label><input type="checkbox" onchange="" id="people_box"> People</label>
             <label><input type="checkbox" onchange="" id="events_box"> Events</label>
@@ -63,6 +63,10 @@
         </script>
         <script src="./Map.js">
         </script>
+        <div class="col" style="position: relative;
+             top: 10px;">
+        <a href="#" class="btn-primary btn-lg btn-block">Create Event</a>
+        </div>
         <div class="col-lg-9">
 
             <div class="card mt-4">
@@ -98,7 +102,6 @@
                         Sequi mollitia, necessitatibus quae sint natus.</p>
                     <small class="text-muted">Posted by Anonymous on 3/1/17</small>
                     <hr>
-                    <a href="#" class="btn btn-success">Leave a Review</a>
                 </div>
             </div>
             <!-- /.card -->
@@ -110,11 +113,48 @@
 
 </div>
 <!-- /.container -->
+<div id="id01" class="modal">
 
+    <form class="container modal-content animate" action="login.php">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="img_avatar2.png" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="form-input">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+
+        </div>
+        <div class="form-input">
+            <button type="submit">Login</button>
+        </div>
+
+        <div class="col" style="background-color:#f1f1f1;margin-top:10px;">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+</div>
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        <p class="m-0 text-center text-white">
+
+            Copyright &copy; BoardFinder 2017</p>
     </div>
     <!-- /.container -->
 </footer>
