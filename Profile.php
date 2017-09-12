@@ -155,11 +155,11 @@
 
 
                 </script>
-                <!--      <div class="bs-callout bs-callout-danger">
+                        <div class="bs-callout bs-callout-danger">
                          <h4>Games you Like</h4>
                          <div class="tagholder" id="liked">
                          </div>
-                         <form action="/add.php" method="POST">
+                <!--         <form action="/add.php" method="POST">
                              <input type="text" name="game">
                              <input type="hidden" name="addToDatabase" value="Liked">
                              <input type="submit">
