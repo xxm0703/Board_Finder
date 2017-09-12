@@ -11,7 +11,7 @@ if (!$conn) {
     exit();
 }
 if (!isset($_SESSION['ID'])) {
-    header("Location: Profile.php#", true, 400);
+    header("Location: Profile.php?login=true", true, 400);
     exit();
 }
 $base = $_GET['base'];

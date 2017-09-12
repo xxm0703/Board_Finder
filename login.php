@@ -9,27 +9,30 @@ session_start();
 $conn = mysqli_connect('127.0.0.1','root', '','finder');
 if (!$conn){
     http_response_code(503);
-    die("asd");
+    exit();
 }else{
     if (!isset($_POST['username'])) {
-        header("Location: Profile.php", true, 400);
+        header("Location: Profile.php?login=true", true, 400);
         exit();
     }
     $test = $_POST["username"];
-    $log = mysqli_query($conn,"SELECT ID,password FROM users WHERE username = \"{$test}\"");
-    if ($log == false || $log->num_rows!=1){
-        
-        //http_response_code(400);
-        header("Location: Profile.php#",true,400);
+    $log = mysqli_query($conn,"SELECT * FROM users WHERE username = \"{$test}\"");
+    if ($log == false || mysqli_num_rows($log) != 1){
+        header("Location: Profile.php?login=true");
         exit();
     }else {
         while ($var_dump = mysqli_fetch_array($log)) {
-            if ($var_dump[1] == $_POST['password']) {
-                $_SESSION['ID'] = $var_dump[0];
+            if ($var_dump['password'] == $_POST['password']) {
+                $_SESSION['ID'] = $var_dump['ID'];
                 $_SESSION['username'] = $_POST['username'];
-                header('Location: Profile.php');
-                exit();
+                $names = explode(' ',$var_dump['names']);
+                $_SESSION['f_name'] = $names[0];
+                $_SESSION['s_name'] = $names[1];
+                $_SESSION['e-mail'] = $var_dump['email'];
+                $_SESSION['image'] = $var_dump['image'];
             }
         }
+        header('Location: Profile.php');
+        exit();
     }
 }

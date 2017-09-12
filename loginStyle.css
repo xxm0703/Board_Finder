@@ -8,6 +8,10 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
+.btn-success{
+    margin-top: 20px;
+}
+
 button {
     background-color: #4CAF50;
     color: white;

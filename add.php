@@ -12,7 +12,7 @@ if (!$conn) {
     exit();
 }
 if (!isset($_SESSION['username'])) {
-    header('Profile.php?login=true');
+    header('Location: Profile.php?login=true');
     exit();
 }
 $base = $_POST['addToDatabase'];
@@ -21,6 +21,12 @@ $username = $_SESSION['ID'];
 $game = strtolower($game);
 $game = mysqli_real_escape_string($conn, $game);
 $username = mysqli_real_escape_string($conn, $username);
+if (trim($game) == ''){
+    http_response_code(400);
+    header("Location: Profile.php");
+    mysqli_close($conn);
+    exit();
+}
 $search = mysqli_query($conn, "SELECT ID FROM games WHERE game_name = '$game'");
 if (mysqli_fetch_array($search) == null) {
     mysqli_query($conn, "INSERT INTO games (game_name) VALUES ('$game')");
@@ -30,9 +36,7 @@ while ($record = mysqli_fetch_array($search)) {
     $int_search = mysqli_query($conn, "SELECT * FROM {$base} WHERE userID = '$username' AND gameID = '$record[0]'");
     if(mysqli_fetch_array($int_search) == null){
         $saver =  $record[0];
-        echo $username;
         $q = mysqli_query($conn, "INSERT INTO {$base} (userID,gameID) VALUES ({$username},{$saver})");
-        var_dump($conn);
         if($q){
             echo "Added";
         }

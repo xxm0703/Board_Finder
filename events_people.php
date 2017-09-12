@@ -40,8 +40,17 @@
             <li><a href="#">Trade</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <?php
+            session_start();
+
+            if (isset($_SESSION['f_name'])) {
+                echo "<li class=\"navbar-inverse\"><a href=\"Profile.php\">Welcome " . $_SESSION['f_name'] . "</a></li>";
+                echo "<li><a href=\"/Board_Finder/logout.php\"><span class=\"glyphicon glyphicon-user\"></span> Logout</a></li>";
+            } else {
+                echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li> <li><a href=\"#\" onclick=\"document.getElementById('id01').style.display='block'\" style=\"width:auto;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
+            }
+
+            ?>
         </ul>
     </div>
 </nav>
@@ -65,47 +74,7 @@
         </script>
         <div class="col" style="position: relative;
              top: 10px;">
-        <a href="#" class="btn-primary btn-lg btn-block">Create Event</a>
-        </div>
-        <div class="col-lg-9">
-
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h3 class="card-title">Product Name</h3>
-                    <h4>$24.99</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit
-                        fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur
-                        praesentium animi perspiciatis molestias iure, ducimus!</p>
-                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    4.0 stars
-                </div>
-            </div>
-            <!-- /.card -->
-
-            <div class="card card-outline-secondary my-4">
-                <div class="card-header">
-                    Product Reviews
-                </div>
-                <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                        similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                        Sequi mollitia, necessitatibus quae sint natus.</p>
-                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                    <hr>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                        similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                        Sequi mollitia, necessitatibus quae sint natus.</p>
-                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                    <hr>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore,
-                        similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-                        Sequi mollitia, necessitatibus quae sint natus.</p>
-                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                    <hr>
-                </div>
-            </div>
-            <!-- /.card -->
-
+            <a href="#" class="btn-primary btn-lg btn-block">Create Event</a>
         </div>
         <!-- /.col-lg-9 -->
 
@@ -115,10 +84,10 @@
 <!-- /.container -->
 <div id="id01" class="modal">
 
-    <form class="container modal-content animate" action="/login.php">
+    <form class="container modal-content animate" action="login.php" method="POST">
         <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img src="img_avatar2.png" alt="Avatar" class="avatar">
+            <img src="logo.png" alt="logo" class="avatar">
         </div>
 
         <div class="form-input">
@@ -133,7 +102,9 @@
         </div>
 
         <div class="col" style="background-color:#f1f1f1;margin-top:10px;">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                Cancel
+            </button>
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
@@ -143,7 +114,7 @@
     var modal = document.getElementById('id01');
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }

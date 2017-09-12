@@ -49,8 +49,8 @@
             <a class="navbar-brand" href="#">BoardFinder</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Events and people</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="events_people.php">Events and people</a></li>
             <li><a href="#">Trade</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -58,8 +58,8 @@
             <?php
             session_start();
 
-            if (isset($_SESSION['username'])) {
-                echo "<li class=\"navbar-inverse\"><a href=\"profile.php\">Welcome " . $_SESSION['username'] . "</a></li>";
+            if (isset($_SESSION['f_name'])) {
+                echo "<li class=\"navbar-inverse\"><a href=\"Profile.php\">Welcome " . $_SESSION['f_name'] . "</a></li>";
                 echo "<li><a href=\"/Board_Finder/logout.php\"><span class=\"glyphicon glyphicon-user\"></span> Logout</a></li>";
             } else {
                 echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li> <li><a href=\"#\" onclick=\"document.getElementById('id01').style.display='block'\" style=\"width:auto;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
@@ -79,47 +79,39 @@
                         <div class="col-lg-12">
                             <div class="col-xs-12 col-sm-4">
                                 <figure>
-                                    <img class="img-circle img-responsive" alt="" src="http://placehold.it/300x300">
+                                    <?php
+                                    if (isset($_SESSION['image'])) {
+                                        echo "<img class=\"img-circle img-responsive\" src = '{$_SESSION['image']}' >";
+                                    } else {
+                                        echo "<img class=\"img-circle img-responsive\" src = 'blank-profile.png' >";
+                                    }
+                                    ?>
                                 </figure>
-                                <div class="row">
-                                    <div class="col-xs-12 social-btns">
-                                        <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                            <a href="#" class="btn btn-social btn-block btn-google">
-                                                <i class="fa fa-google"></i> </a>
-                                        </div>
-                                        <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                            <a href="#" class="btn btn-social btn-block btn-facebook">
-                                                <i class="fa fa-facebook"></i> </a>
-                                        </div>
-                                        <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                            <a href="#" class="btn btn-social btn-block btn-twitter">
-                                                <i class="fa fa-twitter"></i> </a>
-                                        </div>
-                                        <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                            <a href="#" class="btn btn-social btn-block btn-linkedin">
-                                                <i class="fa fa-linkedin"></i> </a>
-                                        </div>
-                                        <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                            <a href="#" class="btn btn-social btn-block btn-github">
-                                                <i class="fa fa-github"></i> </a>
-                                        </div>
-                                        <div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                            <a href="#" class="btn btn-social btn-block btn-stackoverflow">
-                                                <i class="fa fa-stack-overflow"></i> </a>
-                                        </div>
-                                    </div>
-
-
-                                </div>
                             </div>
                             <div class="col-xs-12 col-sm-8">
                                 <ul class="list-group">
-                                    <li class="list-group-item">John Doe</li>
-                                    <li class="list-group-item">Software Engineer</li>
-                                    <li class="list-group-item">Google Inc.</li>
-                                    <li class="list-group-item"><i class="fa fa-phone"></i> 000-000-0000</li>
-                                    <li class="list-group-item"><i class="fa fa-envelope"></i> john@example.com</li>
+                                    <?php
+                                    if (isset($_SESSION['f_name'])) {
+                                        echo "<li class=\"list-group-item\"> " . $_SESSION['f_name'] . " " . $_SESSION['s_name'] . "</li>";
+                                    } else {
+                                        echo "<li class=\"list-group-item\"> No user </li>";
+                                    }
+                                    if (isset($_SESSION['e-mail'])) {
+                                        echo "<li class=\"list-group-item\" ><i class=\"fa fa-envelope\" ></i> " . $_SESSION['e-mail'] . " </li >";
+                                    } else {
+                                        echo "<li class=\"list-group-item\"> No user </li>";
+                                    }
+                                    ?>
+                                    <li class="list-group-item"> Software Engineer</li>
                                 </ul>
+                                <?php
+                                if (!isset($_SESSION['image'])) {
+                                    echo "<form action = \"profile_picture.php\" method = \"POST\" >";
+                                    echo "<input type = \"text\" name = \"image\" class=\"form-input\">";
+                                    echo "<input type = \"submit\" class=\"btn btn-success\" >";
+                                    echo "</form >";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -137,9 +129,9 @@
                     </form>
                 </div>
                 <script type="text/javascript">
-                    var form_submit = function (form) {
+                    function displayData(form) {
                         var val = form.value;
-                        fetch(("interested.php?base=" + val), {
+                        fetch(("show.php?base=" + val), {
                             credentials: "same-origin"
                         })
                             .then(data => data.json())
@@ -152,7 +144,7 @@
                             })
                     }
 
-                    fetch("interested.php", {
+                    fetch("show.php", {
                         credentials: "same-origin"
                     })
                         .then(data => data.json())
@@ -174,13 +166,22 @@
                     <h4 style="display: inline-block">Show games you</h4>
                     <div style="display: inline-block">
                         <form action="add.php" method="POST">
-                            <select class="form-control" name="addToDatabase" style="width: 100%;display: inline-block"
-                                    onchange="form_submit(this)">
+                            <select class="form-control" name="show" style="width: 100%;display: inline-block">
+                                <option>--choose--</option>
                                 <option value="interes_games">interested</option>
                                 <option value="owned_games">playing</option>
                                 <option value="buying_games">wanted</option>
                             </select>
                         </form>
+                        <script>
+                            $(document).ready(function () {
+                                displayData($('select[name="show"]'));
+                                $('select[name="show"]').change(function () {
+                                    displayData(this);
+                                });
+
+                            });
+                        </script>
                     </div>
                     <div class="tagholder" id="liked">
                     </div>
@@ -204,7 +205,7 @@
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close"
                           title="Close Modal">&times;</span>
-                    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                   <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
                 </div>
 
                 <div class="form-input">
