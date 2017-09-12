@@ -55,16 +55,15 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
-        <?php
-        session_start();
+            <?php
+            session_start();
 
-        if (isset($_SESSION['username'])){
-            echo "<li class=\"navbar-inverse\"><a href=\"profile.php\">Welcome " . $_SESSION['username'] . "</a></li>";
-            echo "<li><a href=\"/Board_Finder/logout.php\"><span class=\"glyphicon glyphicon-user\"></span> Logout</a></li>";
-        }
-        else{
-            echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li> <li><a href=\"#\" onclick=\"document.getElementById('id01').style.display='block'\" style=\"width:auto;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
-        }
+            if (isset($_SESSION['username'])) {
+                echo "<li class=\"navbar-inverse\"><a href=\"profile.php\">Welcome " . $_SESSION['username'] . "</a></li>";
+                echo "<li><a href=\"/Board_Finder/logout.php\"><span class=\"glyphicon glyphicon-user\"></span> Logout</a></li>";
+            } else {
+                echo "<li><a href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li> <li><a href=\"#\" onclick=\"document.getElementById('id01').style.display='block'\" style=\"width:auto;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
+            }
 
             ?>
         </ul>
@@ -126,116 +125,120 @@
                     </div>
                 </div>
                 <div class="bs-callout bs-callout-danger">
-                    <h4>Games you are intrested in:</h4>
-                    <div class="tagholder" id="liked">
-                    </div>
+                    <h4 style="display: inline-block">Game you are </h4>
                     <form action="add.php" method="POST">
+                        <select class="form-control" name="addToDatabase" style="width: 100%;display: inline-block">
+                            <option value="interes_games">interested</option>
+                            <option value="owned_games">playing</option>
+                            <option value="buying_games">wanted</option>
+                        </select>
                         <input type="text" name="game">
-                        <input type="hidden" name="addToDatabase" value="interes_games">
                         <input type="submit">
                     </form>
                 </div>
                 <script type="text/javascript">
+                    var form_submit = function (form) {
+                        var val = form.value;
+                        fetch(("interested.php?base=" + val), {
+                            credentials: "same-origin"
+                        })
+                            .then(data => data.json())
+                            .then(data2 => {
+                                var e = $('#liked');
+                                e.empty();
+                                for (var a of data2) {
+                                    e.append(`<span class='tag'>${a}</span>`);
+                                }
+                            })
+                    }
 
-                    fetch("interested.php",{
+                    fetch("interested.php", {
                         credentials: "same-origin"
                     })
-                    .then(data=>data.json())
-                    .then(data2=>{
-                        var e = document.getElementById('liked');
-                        for (var a of data2){
-                            e.innerHTML+=`<span class='tag'>${a}</span>`;
+                        .then(data => data.json())
+                        .then(data2 => {
+                            var e = document.getElementById('liked');
+                            for (var a of data2) {
+                                e.innerHTML += `<span class='tag'>${a}</span>`;
+                            }
+                        })
+                    addEventListener("load", e => {
+                        if (window.location.search == "?login=true") {
+                            document.getElementById('id01').style.display = 'block';
                         }
                     })
-                addEventListener("load",e=>{
-                    if(window.location.search == "?login=true"){
-                        document.getElementById('id01').style.display='block';
-                    }
-                })
 
 
                 </script>
-                        <div class="bs-callout bs-callout-danger">
-                         <h4>Games you Like</h4>
-                         <div class="tagholder" id="liked">
-                         </div>
-                <!--         <form action="/add.php" method="POST">
-                             <input type="text" name="game">
-                             <input type="hidden" name="addToDatabase" value="Liked">
-                             <input type="submit">
-                         </form>
-                     </div>
-                     <div class="bs-callout bs-callout-danger">
-                     </div> -->
-
                 <div class="bs-callout bs-callout-danger">
-                    <h4>Education</h4>
-                    <table class="table table-striped table-responsive ">
-                        <thead>
-                        <tr>
-                            <th>Degree</th>
-                            <th>Graduation Year</th>
-                            <th>CGPA</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Masters in Computer Science and Engineering</td>
-                            <td>2014</td>
-                            <td> 3.50</td>
-                        </tr>
-                        <tr>
-                            <td>BSc. in Computer Science and Engineering</td>
-                            <td>2011</td>
-                            <td> 3.25</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <h4 style="display: inline-block">Show games you</h4>
+                    <div style="display: inline-block">
+                        <form action="add.php" method="POST">
+                            <select class="form-control" name="addToDatabase" style="width: 100%;display: inline-block"
+                                    onchange="form_submit(this)">
+                                <option value="interes_games">interested</option>
+                                <option value="owned_games">playing</option>
+                                <option value="buying_games">wanted</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="tagholder" id="liked">
+                    </div>
+                    <!--         <form action="/add.php" method="POST">
+                                 <input type="text" name="game">
+                                 <input type="hidden" name="addToDatabase" value="Liked">
+                                 <input type="submit">
+                             </form>
+                         </div>
+                         <div class="bs-callout bs-callout-danger">
+                         </div> -->
+
                 </div>
             </div>
+            <!-- resume -->
         </div>
-        <!-- resume -->
-    </div>
 
-    <div id="id01" class="modal">
+        <div id="id01" class="modal">
 
-        <form class="container modal-content animate" action="login.php" method="POST">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <img src="img_avatar2.png" alt="Avatar" class="avatar">
-            </div>
+            <form class="container modal-content animate" action="login.php" method="POST">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                          title="Close Modal">&times;</span>
+                    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                </div>
 
-            <div class="form-input">
-                <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required>
-                <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
+                <div class="form-input">
+                    <label><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+                    <label><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
 
-            </div>
-            <div class="form-input">
-                <button type="submit">Login</button>
-            </div>
+                </div>
+                <div class="form-input">
+                    <button type="submit">Login</button>
+                </div>
 
-            <div class="col" style="background-color:#f1f1f1;margin-top:10px;">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
-                    Cancel
-                </button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-        </form>
-    </div>
+                <div class="col" style="background-color:#f1f1f1;margin-top:10px;">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn">
+                        Cancel
+                    </button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
-        }
-    </script>
-</div>
+        </script>
+    </div>
 </body>
 </html>

@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
     header('Profile.php?login=true');
     exit();
 }
-
+$base = $_POST['addToDatabase'];
 $game = $_POST['game'];
 $username = $_SESSION['ID'];
 $game = strtolower($game);
@@ -27,11 +27,11 @@ if (mysqli_fetch_array($search) == null) {
 }
 $search = mysqli_query($conn, "SELECT ID FROM games WHERE game_name = '$game'");
 while ($record = mysqli_fetch_array($search)) {
-    $int_search = mysqli_query($conn, "SELECT * FROM interes_games WHERE userID = '$username' AND gameID = '$record[0]'");
+    $int_search = mysqli_query($conn, "SELECT * FROM {$base} WHERE userID = '$username' AND gameID = '$record[0]'");
     if(mysqli_fetch_array($int_search) == null){
         $saver =  $record[0];
         echo $username;
-        $q = mysqli_query($conn, "INSERT INTO interes_games (userID,gameID) VALUES ({$username},{$saver})");
+        $q = mysqli_query($conn, "INSERT INTO {$base} (userID,gameID) VALUES ({$username},{$saver})");
         var_dump($conn);
         if($q){
             echo "Added";
