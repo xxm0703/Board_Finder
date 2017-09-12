@@ -29,15 +29,15 @@ $search = mysqli_query($conn, "SELECT ID FROM games WHERE game_name = '$game'");
 while ($record = mysqli_fetch_array($search)) {
     $int_search = mysqli_query($conn, "SELECT * FROM interes_games WHERE userID = '$username' AND gameID = '$record[0]'");
     if(mysqli_fetch_array($int_search) == null){
-        echo $record[0];
+        $saver =  $record[0];
         echo $username;
-        mysqli_query($conn, "INSERT INTO interes_games (userID, gameID) VALUES ('.{$username}.', '.{$record[0]}.')");
-        echo "Added";
+        $q = mysqli_query($conn, "INSERT INTO interes_games (userID,gameID) VALUES ({$username},{$saver})");
+        var_dump($conn);
+        if($q){
+            echo "Added";
+        }
     }
     header("Location: Profile.php");
     mysqli_close($conn);
-
-
-    header("Location: Profile.php#", true, 400);
     exit();
 }
