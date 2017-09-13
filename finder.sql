@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 септ 2017 в 16:49
+-- Generation Time: 13 септ 2017 в 09:05
 -- Версия на сървъра: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -21,6 +21,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `finder`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `buying_games`
+--
+
+CREATE TABLE `buying_games` (
+  `ID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `gameID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Схема на данните от таблица `buying_games`
+--
+
+INSERT INTO `buying_games` (`ID`, `userID`, `gameID`) VALUES
+(1, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -63,7 +82,10 @@ CREATE TABLE `games` (
 --
 
 INSERT INTO `games` (`ID`, `game_name`) VALUES
-(1, 'Catan');
+(1, 'monopoly'),
+(2, 'concept'),
+(4, 'catan'),
+(5, 'dixit');
 
 -- --------------------------------------------------------
 
@@ -77,6 +99,14 @@ CREATE TABLE `interes_games` (
   `gameID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Схема на данните от таблица `interes_games`
+--
+
+INSERT INTO `interes_games` (`ID`, `userID`, `gameID`) VALUES
+(1, 1, 1),
+(2, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +119,14 @@ CREATE TABLE `owned_games` (
   `gameID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Схема на данните от таблица `owned_games`
+--
+
+INSERT INTO `owned_games` (`ID`, `userID`, `gameID`) VALUES
+(1, 1, 4),
+(3, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -98,19 +136,28 @@ CREATE TABLE `owned_games` (
 CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
   `username` varchar(15) DEFAULT NULL,
-  `password` varchar(15) DEFAULT NULL
+  `password` varchar(15) DEFAULT NULL,
+  `names` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `image` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Схема на данните от таблица `users`
 --
 
-INSERT INTO `users` (`ID`, `username`, `password`) VALUES
-(1, 'martin', 'martin16');
+INSERT INTO `users` (`ID`, `username`, `password`, `names`, `email`, `image`) VALUES
+(1, 'martin', 'martin16', 'Martin Jordanov', 'xxm0703@abv.bg', '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `buying_games`
+--
+ALTER TABLE `buying_games`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `events`
@@ -147,6 +194,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `buying_games`
+--
+ALTER TABLE `buying_games`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
@@ -155,7 +207,17 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `interes_games`
+--
+ALTER TABLE `interes_games`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `owned_games`
+--
+ALTER TABLE `owned_games`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
