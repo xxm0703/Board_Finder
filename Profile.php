@@ -80,7 +80,7 @@
                             <div class="col-xs-12 col-sm-4">
                                 <figure>
                                     <?php
-                                    if (isset($_SESSION['image'])) {
+                                    if (isset($_SESSION['image']) && $_SESSION['image'] != null) {
                                         echo "<img class=\"img-circle img-responsive\" src = '{$_SESSION['image']}' >";
                                     } else {
                                         echo "<img class=\"img-circle img-responsive\" src = 'blank-profile.png' >";
@@ -105,7 +105,7 @@
                                     <li class="list-group-item"> Software Engineer</li>
                                 </ul>
                                 <?php
-                                if (!isset($_SESSION['image'])) {
+                                if (!isset($_SESSION['image']) || $_SESSION['image'] == null) {
                                     echo "<form action = \"profile_picture.php\" method = \"POST\" >";
                                     echo "<input type = \"text\" name = \"image\" class=\"form-input\">";
                                     echo "<input type = \"submit\" class=\"btn btn-success\" >";
