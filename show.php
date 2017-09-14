@@ -11,12 +11,12 @@ if (!$conn) {
     exit();
 }
 if (!isset($_SESSION['ID'])) {
-    header("Location: Profile.php?login=true", true, 400);
+    header("Location: Profile.php?login=true");
     exit();
 }
 $base = $_GET['base'];
 $ID = $_SESSION['ID'];
-$log = mysqli_query($conn, "SELECT gameID FROM {$base} WHERE userID='{$ID}'");
+$log = mysqli_query($conn, "SELECT gameID FROM info_games WHERE userID={$ID} AND type={$base}");
 if ($log != null) {
     while ($gameid = mysqli_fetch_array($log)) {
         $temp = $gameid[0];

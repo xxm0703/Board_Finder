@@ -120,9 +120,9 @@
                     <h4 style="display: inline-block">Game you are </h4>
                     <form action="add.php" method="POST">
                         <select class="form-control" name="addToDatabase" style="width: 100%;display: inline-block">
-                            <option value="interes_games">interested</option>
-                            <option value="owned_games">playing</option>
-                            <option value="buying_games">wanted</option>
+                            <option value="1">interested</option>
+                            <option value="2">playing</option>
+                            <option value="3">wanted</option>
                         </select>
                         <input type="text" name="game">
                         <input type="submit">
@@ -130,30 +130,26 @@
                 </div>
                 <script type="text/javascript">
                     function displayData(form) {
-                        var val = form.value;
-                        fetch(("show.php?base=" + val), {
-                            credentials: "same-origin"
+                        var val = $(form).serialize();
+                        fetch(("show.php?" + val), {
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+
                         })
                             .then(data => data.json())
                             .then(data2 => {
                                 var e = $('#liked');
                                 e.empty();
                                 for (var a of data2) {
+                                    console.log(a);
                                     e.append(`<span class='tag'>${a}</span>`);
                                 }
                             })
                     }
 
-                    fetch("show.php", {
-                        credentials: "same-origin"
-                    })
-                        .then(data => data.json())
-                        .then(data2 => {
-                            var e = document.getElementById('liked');
-                            for (var a of data2) {
-                                e.innerHTML += `<span class='tag'>${a}</span>`;
-                            }
-                        })
                     addEventListener("load", e => {
                         if (window.location.search == "?login=true") {
                             document.getElementById('id01').style.display = 'block';
@@ -165,18 +161,17 @@
                 <div class="bs-callout bs-callout-danger">
                     <h4 style="display: inline-block">Show games you</h4>
                     <div style="display: inline-block">
-                        <form action="add.php" method="POST">
-                            <select class="form-control" name="show" style="width: 100%;display: inline-block">
+                        <form id="inter">
+                            <select class="form-control" name="base" style="width: 100%;display: inline-block">
                                 <option>--choose--</option>
-                                <option value="interes_games">interested</option>
-                                <option value="owned_games">playing</option>
-                                <option value="buying_games">wanted</option>
+                                <option value="1">interested</option>
+                                <option value="2">playing</option>
+                                <option value="3">wanted</option>
                             </select>
                         </form>
                         <script>
                             $(document).ready(function () {
-                                displayData($('select[name="show"]'));
-                                $('select[name="show"]').change(function () {
+                                $('form[id="inter"]').change(function () {
                                     displayData(this);
                                 });
 
@@ -205,7 +200,7 @@
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close"
                           title="Close Modal">&times;</span>
-                   <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
+                    <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
                 </div>
 
                 <div class="form-input">

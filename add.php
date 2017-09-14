@@ -33,10 +33,10 @@ if (mysqli_fetch_array($search) == null) {
 }
 $search = mysqli_query($conn, "SELECT ID FROM games WHERE game_name = '$game'");
 while ($record = mysqli_fetch_array($search)) {
-    $int_search = mysqli_query($conn, "SELECT * FROM {$base} WHERE userID = '$username' AND gameID = '$record[0]'");
+    $int_search = mysqli_query($conn, "SELECT * FROM info_games WHERE userID = {$username} AND gameID = {$record[0]} AND type={$base}'");
     if(mysqli_fetch_array($int_search) == null){
         $saver =  $record[0];
-        $q = mysqli_query($conn, "INSERT INTO {$base} (userID,gameID) VALUES ({$username},{$saver})");
+        $q = mysqli_query($conn, "INSERT INTO info_games (userID,gameID, type) VALUES ({$username},{$saver},{$base})");
         if($q){
             echo "Added";
         }
