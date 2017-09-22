@@ -180,15 +180,6 @@
                     </div>
                     <div class="tagholder" id="liked">
                     </div>
-                    <!--         <form action="/add.php" method="POST">
-                                 <input type="text" name="game">
-                                 <input type="hidden" name="addToDatabase" value="Liked">
-                                 <input type="submit">
-                             </form>
-                         </div>
-                         <div class="bs-callout bs-callout-danger">
-                         </div> -->
-
                 </div>
             </div>
             <!-- resume -->
