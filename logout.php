@@ -8,6 +8,6 @@
 //echo '<h1>HI</h1>';
 session_start();
 session_destroy();
-header("Location: Profile.php#?login=true");
+header("Location: events_people.php");
 ?>
 
