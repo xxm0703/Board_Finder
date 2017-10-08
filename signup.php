@@ -14,7 +14,6 @@ $email = $_POST['email'];
 $result = mysqli_query($conn, "SELECT ID FROM users WHERE username={'$user'}");
 if($result == false){
     if (mysqli_query($conn,"INSERT INTO users (username,password,names,email) VALUES ('{$user}','{$pass}','{$names}','{$email}')")){
-        echo 'HI';
         header('Location: events_people.php?login=true');
     }
 }
